@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETStandard,Version=v2.1": {
+      "Markdig/0.21.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/Markdig.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Markdig.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authorization/3.1.6": {
         "type": "package",
         "dependencies": {
@@ -431,9 +440,31 @@
           "lib/netstandard2.0/System.Threading.Tasks.Extensions.dll": {}
         }
       },
+      "Tewr.Blazor.FileReader/2.0.0.20242": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Components.Web": "3.1.3",
+          "Microsoft.Bcl.AsyncInterfaces": "1.1.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Tewr.Blazor.FileReader.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Tewr.Blazor.FileReader.dll": {}
+        },
+        "build": {
+          "buildTransitive/Tewr.Blazor.FileReader.props": {}
+        },
+        "buildMultiTargeting": {
+          "buildMultiTargeting/Tewr.Blazor.FileReader.props": {}
+        }
+      },
       "BlazorPeliculas.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.1",
+        "dependencies": {
+          "System.ComponentModel.Annotations": "4.7.0"
+        },
         "compile": {
           "bin/placeholder/BlazorPeliculas.Shared.dll": {}
         },
@@ -444,6 +475,27 @@
     }
   },
   "libraries": {
+    "Markdig/0.21.1": {
+      "sha512": "1tC4yb1lOnx7xPwNIaIFvlfDIYObiYylmYXcHP+QdIOEXaJif5PXcp71QHH5sYKNuiql/28oegDYS+2t6W1zpg==",
+      "type": "package",
+      "path": "markdig/0.21.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net452/Markdig.dll",
+        "lib/net452/Markdig.xml",
+        "lib/netcoreapp2.1/Markdig.dll",
+        "lib/netcoreapp2.1/Markdig.xml",
+        "lib/netcoreapp3.1/Markdig.dll",
+        "lib/netcoreapp3.1/Markdig.xml",
+        "lib/netstandard2.0/Markdig.dll",
+        "lib/netstandard2.0/Markdig.xml",
+        "lib/netstandard2.1/Markdig.dll",
+        "lib/netstandard2.1/Markdig.xml",
+        "markdig.0.21.1.nupkg.sha512",
+        "markdig.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.Authorization/3.1.6": {
       "sha512": "n0EC0W8jRpM2o1sKKYQpFuvE1sgW7juyEbhVZPcHy9VnHyZYvcIBHVJ6aPCtwqf/16KyqIB1XDVjPnPgyui47Q==",
       "type": "package",
@@ -1637,6 +1689,26 @@
         "version.txt"
       ]
     },
+    "Tewr.Blazor.FileReader/2.0.0.20242": {
+      "sha512": "Qph5o6+jFLW1KB2Ipoq+eiAbo5Rh6uhDmN/8zck4deBuypErCHVWw7jUgFNulwiRLg06xffCN6I5deKQI5oXRQ==",
+      "type": "package",
+      "path": "tewr.blazor.filereader/2.0.0.20242",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "build/Microsoft.AspNetCore.StaticWebAssets.props",
+        "build/Tewr.Blazor.FileReader.props",
+        "buildMultiTargeting/Tewr.Blazor.FileReader.props",
+        "buildTransitive/Tewr.Blazor.FileReader.props",
+        "icon.png",
+        "lib/netstandard2.0/Blazor.FileReader.xml",
+        "lib/netstandard2.0/Tewr.Blazor.FileReader.dll",
+        "staticwebassets/FileReaderComponent.js",
+        "staticwebassets/FileReaderComponent.js.map",
+        "tewr.blazor.filereader.2.0.0.20242.nupkg.sha512",
+        "tewr.blazor.filereader.nuspec"
+      ]
+    },
     "BlazorPeliculas.Shared/1.0.0": {
       "type": "project",
       "path": "../Shared/BlazorPeliculas.Shared.csproj",
@@ -1646,10 +1718,12 @@
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.1": [
       "BlazorPeliculas.Shared >= 1.0.0",
+      "Markdig >= 0.21.1",
       "Microsoft.AspNetCore.Components.WebAssembly >= 3.2.1",
       "Microsoft.AspNetCore.Components.WebAssembly.Build >= 3.2.1",
       "Microsoft.AspNetCore.Components.WebAssembly.DevServer >= 3.2.1",
-      "System.Net.Http.Json >= 3.2.0"
+      "System.Net.Http.Json >= 3.2.0",
+      "Tewr.Blazor.FileReader >= 2.0.0.20242"
     ]
   },
   "packageFolders": {
@@ -1700,6 +1774,10 @@
     "frameworks": {
       "netstandard2.1": {
         "dependencies": {
+          "Markdig": {
+            "target": "Package",
+            "version": "[0.21.1, )"
+          },
           "Microsoft.AspNetCore.Components.WebAssembly": {
             "target": "Package",
             "version": "[3.2.1, )"
@@ -1717,6 +1795,10 @@
           "System.Net.Http.Json": {
             "target": "Package",
             "version": "[3.2.0, )"
+          },
+          "Tewr.Blazor.FileReader": {
+            "target": "Package",
+            "version": "[2.0.0.20242, )"
           }
         },
         "imports": [

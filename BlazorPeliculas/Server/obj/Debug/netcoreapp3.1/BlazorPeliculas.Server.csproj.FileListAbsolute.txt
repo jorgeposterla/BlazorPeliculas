@@ -213,3 +213,6 @@ C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Server\obj\Debug
 C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Server\obj\Debug\netcoreapp3.1\BlazorPeliculas.Server.dll
 C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Server\obj\Debug\netcoreapp3.1\BlazorPeliculas.Server.pdb
 C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Server\obj\Debug\netcoreapp3.1\BlazorPeliculas.Server.genruntimeconfig.cache
+C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Server\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Server\bin\Debug\netcoreapp3.1\Tewr.Blazor.FileReader.dll
+C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Server\bin\Debug\netcoreapp3.1\Markdig.dll

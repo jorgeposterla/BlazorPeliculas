@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "p//u643FOeAVM7B8r+JdzkI7u5FyJmkaCcJDVQUID4uA4B6AnAl+u6exZWb37BJL2bgdXI/DSJnh++7LcPoBvQ==",
+  "dgSpecHash": "VKTfjS/Fb5wIelNj/LQKpy4Jj9W3kox1BplxFlThyFOCBmOgUcAu4TLhehgOjCYI8RLzZEIRBXYy/fbd8HzIkg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Peregrino\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Client\\BlazorPeliculas.Client.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Peregrino\\.nuget\\packages\\markdig\\0.21.1\\markdig.0.21.1.nupkg.sha512",
     "C:\\Users\\Peregrino\\.nuget\\packages\\microsoft.aspnetcore.authorization\\3.1.6\\microsoft.aspnetcore.authorization.3.1.6.nupkg.sha512",
     "C:\\Users\\Peregrino\\.nuget\\packages\\microsoft.aspnetcore.components\\3.1.6\\microsoft.aspnetcore.components.3.1.6.nupkg.sha512",
     "C:\\Users\\Peregrino\\.nuget\\packages\\microsoft.aspnetcore.components.analyzers\\3.1.6\\microsoft.aspnetcore.components.analyzers.3.1.6.nupkg.sha512",
@@ -40,7 +41,8 @@
     "C:\\Users\\Peregrino\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.7.1\\system.runtime.compilerservices.unsafe.4.7.1.nupkg.sha512",
     "C:\\Users\\Peregrino\\.nuget\\packages\\system.text.encodings.web\\4.7.1\\system.text.encodings.web.4.7.1.nupkg.sha512",
     "C:\\Users\\Peregrino\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512",
-    "C:\\Users\\Peregrino\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+    "C:\\Users\\Peregrino\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
+    "C:\\Users\\Peregrino\\.nuget\\packages\\tewr.blazor.filereader\\2.0.0.20242\\tewr.blazor.filereader.2.0.0.20242.nupkg.sha512"
   ],
   "logs": []
 }
