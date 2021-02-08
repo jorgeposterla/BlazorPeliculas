@@ -426,8 +426,8 @@ C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug
 C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\RazorDeclaration\Shared\SelectorMultipleTypeahead.razor.g.cs
 C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\Razor\Shared\CustomTypeahead.razor.g.cs
 C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\Razor\Shared\SelectorMultipleTypeahead.razor.g.cs
-C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\integrity\u0H7K86EoeReJ9m7TNbyf9ujpdq1330gqQnnZ395fNA=.hash
-C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\integrity\c6aTQWgVtafzgbkRv8NmW8BLHh1qeAroBVo3kGTuB_M=.hash
-C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\integrity\V-0g7OUftQ3kZvveJezKvsT7pVaMFpKN1WiSdF-YUhU=.hash
-C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\integrity\ociDOOJCYcpfHO7wH45G5WJNTv5WhenY4nY14zMuCZ4=.hash
-C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\integrity\bItklXtrm9ioEkrenXc-oJk6uo261KzLcGbKbsQRonI=.hash
+C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\integrity\l05d7TSKp8Kxf-Oohb43HJdIIfP2r2I_IPVkmQ5nCXs=.hash
+C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\integrity\43mBhJE_7NFzHRfJZ1Dg2iNEajQVqyu7xmq1b1kWcV0=.hash
+C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\integrity\X2oCwcoDDgvjb2VeYtnyF9IM8LALqNexQ0IrVmt2miE=.hash
+C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\integrity\iC3XcCjr13f7EvhCzuUQxUVGF9nbRQU_cky2mwXG9Uc=.hash
+C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\netstandard2.1\integrity\VjTM2B9zKVe4hNFNK06O-sHjZluB8cckMvFEkp4OFsA=.hash

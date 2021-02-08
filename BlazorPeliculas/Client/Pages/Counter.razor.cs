@@ -3,6 +3,7 @@ using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using static BlazorPeliculas.Client.Shared.MainLayout;
 
@@ -10,18 +11,20 @@ namespace BlazorPeliculas.Client.Pages
 {
     public class CounterBase : ComponentBase
     {
-        [Inject] protected ServicioSingleton Singleton { get; set; }
-        [Inject] protected ServicioTransient Transient { get; set; }
         [Inject] public IJSRuntime JS { get; set; }
         protected int currentCount = 0;
         static int currentCountStatic = 0;
 
+        IJSObjectReference modulo;
+
         [JSInvokable]
         public async Task IncrementCount()
         {
+            modulo = await JS.InvokeAsync<IJSObjectReference>("import", "./js/Counter.js");
+            await modulo.InvokeVoidAsync("mostrarAlerta", "Hola Mundo");
+
             currentCount++;
-            Singleton.Valor = currentCount;
-            Transient.Valor = currentCount;
+            
             currentCountStatic++;
             await JS.InvokeVoidAsync("pruebaPuntoNetStatic");
         }                    

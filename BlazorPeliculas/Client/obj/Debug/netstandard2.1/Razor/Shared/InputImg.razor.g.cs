@@ -94,6 +94,13 @@ using BlazorPeliculas.Client.Helpers;
 #line hidden
 #nullable disable
 #nullable restore
+#line 13 "C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+using BlazorPeliculas.Shared.DTOs;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 1 "C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\Shared\InputImg.razor"
 using System.IO;
 

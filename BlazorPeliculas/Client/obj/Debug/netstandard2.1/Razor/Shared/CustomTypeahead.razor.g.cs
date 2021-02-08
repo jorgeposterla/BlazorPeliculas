@@ -93,6 +93,13 @@ using BlazorPeliculas.Client.Helpers;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 13 "C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+using BlazorPeliculas.Shared.DTOs;
+
+#line default
+#line hidden
+#nullable disable
     public partial class CustomTypeahead<TItem> : CustomTypeaheadBase<TItem>
     {
         #pragma warning disable 1998
