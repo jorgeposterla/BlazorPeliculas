@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qpiHAnxqOyIEi4Pz/MLCZr3cQJQs9MSyRhco2O3ggSXMFs5U0uksEMRBu/GtbV1fvN/9XQbFlrOmaOo3xguWzw==",
+  "dgSpecHash": "xLDAhKsXAVRHvs2hJPi/QR9dBzdP3GsZK/+7O6qY2BzoCciMTntl+d6KwRNufXe+m9glllGV1mTUOxlxAqBDbQ==",
   "success": true,
   "projectFilePath": "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Client\\BlazorPeliculas.Client.csproj",
   "expectedPackageFiles": [
@@ -34,7 +34,7 @@
     "C:\\Users\\Peregrino\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
     "C:\\Users\\Peregrino\\.nuget\\packages\\system.net.http.json\\5.0.0\\system.net.http.json.5.0.0.nupkg.sha512",
     "C:\\Users\\Peregrino\\.nuget\\packages\\tewr.blazor.filereader\\3.0.0.20340\\tewr.blazor.filereader.3.0.0.20340.nupkg.sha512",
-    "C:\\Users\\Peregrino\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.2\\microsoft.netcore.app.runtime.browser-wasm.5.0.2.nupkg.sha512"
+    "C:\\Users\\Peregrino\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.4\\microsoft.netcore.app.runtime.browser-wasm.5.0.4.nupkg.sha512"
   ],
   "logs": []
 }

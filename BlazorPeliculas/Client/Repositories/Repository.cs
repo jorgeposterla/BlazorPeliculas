@@ -13,7 +13,8 @@ namespace BlazorPeliculas.Client.Repositories
     {
         private readonly HttpClient httpClient;
 
-        private JsonSerializerOptions OpcionesPorDefectoJSON => new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
+        private JsonSerializerOptions OpcionesPorDefectoJSON => 
+new JsonSerializerOptions() { PropertyNameCaseInsensitive = true };
 
         public Repository(HttpClient httpClient)
         {

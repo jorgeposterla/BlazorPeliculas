@@ -7,3 +7,12 @@ C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Shared\obj\Debug
 C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Shared\obj\Debug\netstandard2.1\BlazorPeliculas.Shared.dll
 C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Shared\obj\Debug\netstandard2.1\BlazorPeliculas.Shared.pdb
 C:\Users\Peregrino\source\repos\BlazorPeliculas\BlazorPeliculas\Shared\obj\Debug\netstandard2.1\BlazorPeliculas.Shared.csproj.CoreCompileInputs.cache
+E:\repos\BlazorPeliculas\BlazorPeliculas\Shared\bin\Debug\netstandard2.1\BlazorPeliculas.Shared.deps.json
+E:\repos\BlazorPeliculas\BlazorPeliculas\Shared\bin\Debug\netstandard2.1\BlazorPeliculas.Shared.dll
+E:\repos\BlazorPeliculas\BlazorPeliculas\Shared\bin\Debug\netstandard2.1\BlazorPeliculas.Shared.pdb
+E:\repos\BlazorPeliculas\BlazorPeliculas\Shared\obj\Debug\netstandard2.1\BlazorPeliculas.Shared.csprojAssemblyReference.cache
+E:\repos\BlazorPeliculas\BlazorPeliculas\Shared\obj\Debug\netstandard2.1\BlazorPeliculas.Shared.AssemblyInfoInputs.cache
+E:\repos\BlazorPeliculas\BlazorPeliculas\Shared\obj\Debug\netstandard2.1\BlazorPeliculas.Shared.AssemblyInfo.cs
+E:\repos\BlazorPeliculas\BlazorPeliculas\Shared\obj\Debug\netstandard2.1\BlazorPeliculas.Shared.csproj.CoreCompileInputs.cache
+E:\repos\BlazorPeliculas\BlazorPeliculas\Shared\obj\Debug\netstandard2.1\BlazorPeliculas.Shared.dll
+E:\repos\BlazorPeliculas\BlazorPeliculas\Shared\obj\Debug\netstandard2.1\BlazorPeliculas.Shared.pdb

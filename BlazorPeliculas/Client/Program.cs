@@ -29,8 +29,6 @@ namespace BlazorPeliculas.Client
         public static void ConfigureServices(IServiceCollection services)
         {
             services.AddOptions(); //Sistema de autorización.
-            services.AddSingleton<ServicioSingleton>();
-            services.AddTransient<ServicioTransient>();
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IMostrarMensajes, MostrarMensajes>();
             services.AddFileReaderService(options => options.InitializeOnFirstCall = true);
