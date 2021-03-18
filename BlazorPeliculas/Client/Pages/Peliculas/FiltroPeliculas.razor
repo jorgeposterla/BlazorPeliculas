@@ -1,5 +1,5 @@
 ﻿@page "/peliculas/buscar"
-@inject IRepository repositorio
+@inject IRepository repository
 
 <h3>Filtro Películas</h3>
 
@@ -55,7 +55,7 @@
 
     protected override void OnInitialized()
     {
-        Peliculas = repositorio.ObtenerPeliculas();
+        Peliculas = repository.ObtenerPeliculas();
     }
 
     private void TituloKeyPress(KeyboardEventArgs e)
@@ -78,7 +78,7 @@
 
     private void LimpiarOnClick()
     {
-        Peliculas = repositorio.ObtenerPeliculas();
+        Peliculas = repository.ObtenerPeliculas();
         titulo = "";
         generoSeleccionado = "0";
         futurosEstrenos = false;

@@ -27,7 +27,7 @@ namespace BlazorPeliculas.Client.Shared
         protected bool IsShowingSuggestions { get; private set; } = false;
         protected bool IsShowingSearchbar { get; private set; } = true;
         protected bool IsShowingMask { get; private set; } = false;
-        protected TItem[] Suggestions { get; set; } = new TItem[0];
+        protected TItem[] Suggestions { get; set; } = Array.Empty<TItem>();
         protected string SearchText
         {
             get => _searchText;
@@ -38,7 +38,7 @@ namespace BlazorPeliculas.Client.Shared
                 if (value.Length == 0)
                 {
                     _debounceTimer.Stop();
-                    Suggestions = new TItem[0];
+                    Suggestions = Array.Empty<TItem>();
                 }
                 else if (value.Length >= MinimumLength)
                 {

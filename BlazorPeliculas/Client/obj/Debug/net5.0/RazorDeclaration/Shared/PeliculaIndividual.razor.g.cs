@@ -116,11 +116,11 @@ using BlazorPeliculas.Shared.DTOs;
     [Parameter] public Pelicula Pelicula { get; set; }
     [Parameter] public bool MostrarBotones { get; set; } = false;
     [Parameter] public EventCallback<Pelicula> EliminarPelicula { get; set; }
-    private string urlPelicula = string.Empty;
+    private string urlPelicula;
 
     protected override void OnInitialized()
     {
-        urlPelicula = $"pelicula/";
+        urlPelicula = $"pelicula/{Pelicula?.Id}/{Pelicula?.Titulo?.Replace(" ", "-")}";
     }
 
 #line default

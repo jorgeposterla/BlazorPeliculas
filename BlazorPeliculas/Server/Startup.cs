@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using BlazorPeliculas.Server.Helpers;
+using Newtonsoft.Json;
 
 namespace BlazorPeliculas.Server
 {
@@ -28,7 +29,8 @@ namespace BlazorPeliculas.Server
             //services.AddScoped<IAlmacenadorDeArchivos, AlmacenadorArchivosAzStorage>();
             services.AddScoped<IAlmacenadorDeArchivos, AlmacenadorArchivosLocal>();
             services.AddHttpContextAccessor();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson(
+                options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddRazorPages();
         }
 

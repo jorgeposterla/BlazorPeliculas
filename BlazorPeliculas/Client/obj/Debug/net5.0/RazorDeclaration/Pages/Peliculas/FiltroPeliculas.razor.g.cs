@@ -124,7 +124,7 @@ using BlazorPeliculas.Shared.DTOs;
 
     protected override void OnInitialized()
     {
-        Peliculas = repositorio.ObtenerPeliculas();
+        Peliculas = repository.ObtenerPeliculas();
     }
 
     private void TituloKeyPress(KeyboardEventArgs e)
@@ -147,7 +147,7 @@ using BlazorPeliculas.Shared.DTOs;
 
     private void LimpiarOnClick()
     {
-        Peliculas = repositorio.ObtenerPeliculas();
+        Peliculas = repository.ObtenerPeliculas();
         titulo = "";
         generoSeleccionado = "0";
         futurosEstrenos = false;
@@ -158,7 +158,7 @@ using BlazorPeliculas.Shared.DTOs;
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IRepository repositorio { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IRepository repository { get; set; }
     }
 }
 #pragma warning restore 1591

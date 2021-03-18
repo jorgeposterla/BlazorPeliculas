@@ -196,3 +196,6 @@ E:\repos\BlazorPeliculas\BlazorPeliculas\Server\obj\Debug\net5.0\BlazorPeliculas
 E:\repos\BlazorPeliculas\BlazorPeliculas\Server\obj\Debug\net5.0\ref\BlazorPeliculas.Server.dll
 E:\repos\BlazorPeliculas\BlazorPeliculas\Server\obj\Debug\net5.0\BlazorPeliculas.Server.pdb
 E:\repos\BlazorPeliculas\BlazorPeliculas\Server\obj\Debug\net5.0\BlazorPeliculas.Server.genruntimeconfig.cache
+E:\repos\BlazorPeliculas\BlazorPeliculas\Server\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+E:\repos\BlazorPeliculas\BlazorPeliculas\Server\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+E:\repos\BlazorPeliculas\BlazorPeliculas\Server\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
