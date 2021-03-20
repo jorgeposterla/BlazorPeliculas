@@ -137,7 +137,7 @@ using BlazorPeliculas.Shared.DTOs;
         else
         {
             var PeliculaId = httpResponse.Response;
-            navigationManager.NavigateTo($"/pelicula/{PeliculaId}/{Pelicula.Titulo.Replace(" ", "-")}");
+            navigationManager.NavigateTo($"/peliculas/{PeliculaId}/{Pelicula.Titulo.Replace(" ", "-")}");
         }
     }
 

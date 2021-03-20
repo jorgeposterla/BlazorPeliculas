@@ -115,6 +115,7 @@ using BlazorPeliculas.Shared.DTOs;
 #nullable restore
 #line 54 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Peliculas\VisualizarPelicula.razor"
        
+
     [Parameter] public int PeliculaId { get; set; }
     [Parameter] public string NombrePelicula { get; set; }
     private PeliculaVisualizarDTO model;
@@ -127,7 +128,7 @@ using BlazorPeliculas.Shared.DTOs;
             __builder2.OpenElement(0, "a");
             __builder2.AddAttribute(1, "href", "peliculas/buscar?generoid=" + (
 #nullable restore
-#line 58 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Peliculas\VisualizarPelicula.razor"
+#line 59 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Peliculas\VisualizarPelicula.razor"
                                                                                                   genero.Id
 
 #line default
@@ -136,7 +137,7 @@ using BlazorPeliculas.Shared.DTOs;
             ));
             __builder2.AddContent(2, 
 #nullable restore
-#line 58 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Peliculas\VisualizarPelicula.razor"
+#line 59 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Peliculas\VisualizarPelicula.razor"
                                                                                                               genero.Nombre
 
 #line default
@@ -146,30 +147,30 @@ using BlazorPeliculas.Shared.DTOs;
             __builder2.CloseElement();
         }
 #nullable restore
-#line 58 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Peliculas\VisualizarPelicula.razor"
+#line 59 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Peliculas\VisualizarPelicula.razor"
                                                                                                                                ;
 
-protected async override Task OnInitializedAsync()
-{
-var responseHttp = await repository.Get<PeliculaVisualizarDTO>($"api/peliculas/{PeliculaId}");
-if (responseHttp.Error)
-{
-if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
-{
-navigationManager.NavigateTo("");
-}
-else
-{
-var mensajeError = await responseHttp.GetBody();
-await mostrarMensajes.MostrarMensajeError(mensajeError);
-}
-}
-else
-{
-model = responseHttp.Response;
-}
-}
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHttp = await repository.Get<PeliculaVisualizarDTO>($"api/peliculas/{PeliculaId}");
 
+        if (responseHttp.Error)
+        {
+            if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                navigationManager.NavigateTo("");
+            }
+            else
+            {
+                var mensajeError = await responseHttp.GetBody();
+                await mostrarMensajes.MostrarMensajeError(mensajeError);
+            }
+        }
+        else
+        {
+            model = responseHttp.Response;
+        }
+    }
 
 #line default
 #line hidden

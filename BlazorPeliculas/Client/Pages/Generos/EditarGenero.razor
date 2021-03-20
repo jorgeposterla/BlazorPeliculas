@@ -1,22 +1,55 @@
 ﻿@page "/generos/editar/{GeneroId:int}"
+@inject IRepository repository
+@inject IMostrarMensajes mostrarMensajes
+@inject NavigationManager navigationManager
 
 <h3>Editar Género</h3>
 
-<FormularioGenero OnValidSubmit="Editar" Genero="Genero" />
+@if (Genero == null)
+{
+    <textarea>Cargando...</textarea>
+}
+else
+{
+    <FormularioGenero OnValidSubmit="Editar" Genero="Genero" />
+}
+
 
 @code {
     [Parameter] public int GeneroId { get; set; }
     private Genero Genero;
 
-    protected override void OnInitialized()
+    protected async override Task OnInitializedAsync()
     {
-        Genero = new Genero() { Id = GeneroId, Nombre = "Comedia" };
+        var httpResponse = await repository.Get<Genero>($"api/generos/{GeneroId}");
+        if (httpResponse.Error)
+        {
+            if (httpResponse.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                navigationManager.NavigateTo("generos");
+            }
+            else
+            {
+                await mostrarMensajes.MostrarMensajeError(await httpResponse.GetBody());
+            }
+        }
+        else
+        {
+            Genero = httpResponse.Response;
+        }
+
     }
 
-    private void Editar()
+    private async Task Editar()
     {
-        Console.WriteLine("Editando género de película");
-        Console.WriteLine($"Id: {Genero.Id}");
-        Console.WriteLine($"Nombre: {Genero.Nombre}");
+        var httpResponse = await repository.Put("api/generos", Genero);
+        if (httpResponse.Error)
+        {
+            await mostrarMensajes.MostrarMensajeError(await httpResponse.GetBody());
+        }
+        else
+        {
+            navigationManager.NavigateTo("generos");
+        }
     }
 }

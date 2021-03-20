@@ -112,26 +112,51 @@ using BlazorPeliculas.Shared.DTOs;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 7 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Generos\EditarGenero.razor"
+#line 18 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Generos\EditarGenero.razor"
        
     [Parameter] public int GeneroId { get; set; }
     private Genero Genero;
 
-    protected override void OnInitialized()
+    protected async override Task OnInitializedAsync()
     {
-        Genero = new Genero() { Id = GeneroId, Nombre = "Comedia" };
+        var httpResponse = await repository.Get<Genero>($"api/generos/{GeneroId}");
+        if (httpResponse.Error)
+        {
+            if (httpResponse.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                navigationManager.NavigateTo("generos");
+            }
+            else
+            {
+                await mostrarMensajes.MostrarMensajeError(await httpResponse.GetBody());
+            }
+        }
+        else
+        {
+            Genero = httpResponse.Response;
+        }
+
     }
 
-    private void Editar()
+    private async Task Editar()
     {
-        Console.WriteLine("Editando género de película");
-        Console.WriteLine($"Id: {Genero.Id}");
-        Console.WriteLine($"Nombre: {Genero.Nombre}");
+        var httpResponse = await repository.Put("api/generos", Genero);
+        if (httpResponse.Error)
+        {
+            await mostrarMensajes.MostrarMensajeError(await httpResponse.GetBody());
+        }
+        else
+        {
+            navigationManager.NavigateTo("generos");
+        }
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IMostrarMensajes mostrarMensajes { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IRepository repository { get; set; }
     }
 }
 #pragma warning restore 1591

@@ -112,29 +112,51 @@ using BlazorPeliculas.Shared.DTOs;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 7 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Personas\EditarPersona.razor"
+#line 18 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Personas\EditarPersona.razor"
        
     [Parameter] public int PersonaId { get; set; }
-    Persona Persona = new Persona();
+    Persona Persona;
 
-    protected override void OnInitialized()
+    protected async override Task OnInitializedAsync()
     {
-        Persona = new Persona()
+        var httpResponse = await repository.Get<Persona>($"api/personas/{PersonaId}");
+        if (httpResponse.Error)
         {
-            Id = PersonaId,
-            Nombre = "Jorge",
-            FechaNacimiento = DateTime.Today
-        };
+            if (httpResponse.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                navigationManager.NavigateTo("personas");
+            }
+            else
+            {
+                await mostrarMensajes.MostrarMensajeError(await httpResponse.GetBody());
+            }
+        }
+        else
+        {
+            Persona = httpResponse.Response;
+        }
+
     }
 
-    private void Editar()
+    private async Task Editar()
     {
-        Console.WriteLine("Editando a la persona");
+        var httpResponse = await repository.Put("api/personas", Persona);
+        if (httpResponse.Error)
+        {
+            await mostrarMensajes.MostrarMensajeError(await httpResponse.GetBody());
+        }
+        else
+        {
+            navigationManager.NavigateTo("personas");
+        }
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IMostrarMensajes mostrarMensajes { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IRepository repository { get; set; }
     }
 }
 #pragma warning restore 1591

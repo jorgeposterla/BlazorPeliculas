@@ -25,7 +25,11 @@ namespace BlazorPeliculas.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => 
+            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddAutoMapper(typeof(Startup));
+
             //services.AddScoped<IAlmacenadorDeArchivos, AlmacenadorArchivosAzStorage>();
             services.AddScoped<IAlmacenadorDeArchivos, AlmacenadorArchivosLocal>();
             services.AddHttpContextAccessor();

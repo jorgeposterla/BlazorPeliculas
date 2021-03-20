@@ -58,25 +58,25 @@ else
     private PeliculaVisualizarDTO model;
     private RenderFragment<Genero> enlaceGenero = (genero) =>@<a href="peliculas/buscar?generoid=@genero.Id">@genero.Nombre</a>;
 
-protected async override Task OnInitializedAsync()
-{
-var responseHttp = await repository.Get<PeliculaVisualizarDTO>($"api/pelicula/{PeliculaId}");
+    protected async override Task OnInitializedAsync()
+    {
+        var responseHttp = await repository.Get<PeliculaVisualizarDTO>($"api/peliculas/{PeliculaId}");
 
-if (responseHttp.Error)
-{
-if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
-{
-navigationManager.NavigateTo("");
-}
-else
-{
-var mensajeError = await responseHttp.GetBody();
-await mostrarMensajes.MostrarMensajeError(mensajeError);
-}
-}
-else
-{
-model = responseHttp.Response;
-}
-}
+        if (responseHttp.Error)
+        {
+            if (responseHttp.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                navigationManager.NavigateTo("");
+            }
+            else
+            {
+                var mensajeError = await responseHttp.GetBody();
+                await mostrarMensajes.MostrarMensajeError(mensajeError);
+            }
+        }
+        else
+        {
+            model = responseHttp.Response;
+        }
+    }
 }

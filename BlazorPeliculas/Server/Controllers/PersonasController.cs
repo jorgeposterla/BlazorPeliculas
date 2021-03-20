@@ -1,4 +1,5 @@
-﻿using BlazorPeliculas.Server.Helpers;
+﻿using AutoMapper;
+using BlazorPeliculas.Server.Helpers;
 using BlazorPeliculas.Shared.Entidades;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -15,17 +16,30 @@ namespace BlazorPeliculas.Server.Controllers
     {
         private readonly ApplicationDbContext context;
         private readonly IAlmacenadorDeArchivos almacenadorDeArchivos;
+        private readonly IMapper _mapper;
 
-        public PersonasController(ApplicationDbContext context, IAlmacenadorDeArchivos almacenadorDeArchivos)
+        public PersonasController(ApplicationDbContext context, IAlmacenadorDeArchivos almacenadorDeArchivos, IMapper mapper)
         {
             this.context = context;
             this.almacenadorDeArchivos = almacenadorDeArchivos;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<Persona>>> Get()
         {
             return await context.Personas.ToListAsync();
+        }
+        
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Persona>> Get(int id)
+        {
+            var persona = await context.Personas.FirstOrDefaultAsync(x => x.Id == id);
+            if (persona == null)
+            {
+                return NotFound();
+            }
+            return persona;
         }
 
         [HttpGet("buscar/{textoBusqueda}")]
@@ -47,6 +61,26 @@ namespace BlazorPeliculas.Server.Controllers
             context.Add(persona);
             await context.SaveChangesAsync();
             return persona.Id;
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Put(Persona persona)
+        {
+            var personaDB = await context.Personas.FirstOrDefaultAsync(x => x.Id == persona.Id);
+            if (personaDB == null)
+            {
+                return NotFound();
+            }
+
+            personaDB = _mapper.Map(persona, personaDB);
+
+            if (!string.IsNullOrWhiteSpace(persona.Foto))
+            {
+                var fotoImagen = Convert.FromBase64String(persona.Foto);
+                personaDB.Foto = await almacenadorDeArchivos.EditarArchivo(fotoImagen, "jpg", "personas", personaDB.Foto);
+            }
+            await context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }
