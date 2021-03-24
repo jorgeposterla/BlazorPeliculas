@@ -15,8 +15,8 @@ namespace BlazorPeliculas.Server.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
+                .HasAnnotation("ProductVersion", "5.0.4")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BlazorPeliculas.Shared.Entidades.Genero", b =>
@@ -142,6 +142,10 @@ namespace BlazorPeliculas.Server.Migrations
                         .HasForeignKey("PeliculaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Genero");
+
+                    b.Navigation("Pelicula");
                 });
 
             modelBuilder.Entity("BlazorPeliculas.Shared.Entidades.PeliculaActor", b =>
@@ -157,6 +161,27 @@ namespace BlazorPeliculas.Server.Migrations
                         .HasForeignKey("PersonaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Pelicula");
+
+                    b.Navigation("Persona");
+                });
+
+            modelBuilder.Entity("BlazorPeliculas.Shared.Entidades.Genero", b =>
+                {
+                    b.Navigation("GeneroPeliculas");
+                });
+
+            modelBuilder.Entity("BlazorPeliculas.Shared.Entidades.Pelicula", b =>
+                {
+                    b.Navigation("GenerosPelicula");
+
+                    b.Navigation("PeliculasActor");
+                });
+
+            modelBuilder.Entity("BlazorPeliculas.Shared.Entidades.Persona", b =>
+                {
+                    b.Navigation("PeliculasActor");
                 });
 #pragma warning restore 612, 618
         }

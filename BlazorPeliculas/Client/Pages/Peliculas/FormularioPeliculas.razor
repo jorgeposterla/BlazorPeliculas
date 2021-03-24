@@ -35,7 +35,7 @@
                        Label="Resumen" />
     </div>
     <div class="form-group">
-        <InputImg Label="Foto" ImagenSeleccionada="ImagenSeleccionada" ImagenTemporal="" />
+        <InputImg Label="Foto" ImagenSeleccionada="ImagenSeleccionada" ImagenTemporal="@posterTemporal" />
     </div>
     <div class="form-group">
         <label>Géneros:</label>
@@ -90,6 +90,7 @@
     private void ImagenSeleccionada(string imagenBase64)
     {
         Pelicula.Poster = imagenBase64;
+        posterTemporal = null;
     }
 
     private async Task<IEnumerable<Persona>> BuscarActores(string searchText)

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BlazorPeliculas.Shared.DTOs;
 
 namespace BlazorPeliculas.Server.Controllers
 {
@@ -26,9 +27,11 @@ namespace BlazorPeliculas.Server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Persona>>> Get()
+        public async Task<ActionResult<List<Persona>>> Get([FromQuery] PaginacionDTO paginacion)
         {
-            return await context.Personas.ToListAsync();
+            var queryable = context.Personas.AsQueryable();
+            await HttpContext.InsertarParametrosPaginacionEnRespuesta(queryable, paginacion.CantidadRegistros);
+            return await queryable.Paginar(paginacion).ToListAsync();
         }
         
         [HttpGet("{id}")]
@@ -79,6 +82,20 @@ namespace BlazorPeliculas.Server.Controllers
                 var fotoImagen = Convert.FromBase64String(persona.Foto);
                 personaDB.Foto = await almacenadorDeArchivos.EditarArchivo(fotoImagen, "jpg", "personas", personaDB.Foto);
             }
+            await context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var existe = await context.Personas.AnyAsync(x => x.Id == id);
+            if (!existe)
+            {
+                return NotFound();
+            }
+
+            context.Remove(new Persona { Id = id });
             await context.SaveChangesAsync();
             return NoContent();
         }

@@ -111,24 +111,30 @@ using BlazorPeliculas.Shared.DTOs;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 11 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Shared\ListadoPeliculas.razor"
+#line 13 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Shared\ListadoPeliculas.razor"
        
     [Parameter] public List<Pelicula> Peliculas { get; set; }
 
     async Task EliminarPelicula(Pelicula pelicula)
     {
         var confirmado = await js.Confirm($"¿Desea borrar la película {pelicula.Titulo}?");
-        if (confirmado)
+        var responseHttp = await repository.Delete($"api/peliculas/{pelicula.Id}");
+
+        if (responseHttp.Error)
+        {
+            await mostrarMensajes.MostrarMensajeError(await responseHttp.GetBody());
+        }
+        else
         {
             Peliculas.Remove(pelicula);
-            Console.WriteLine($"Se ha eliminando la película {pelicula.Titulo}");
         }
-
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IMostrarMensajes mostrarMensajes { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IRepository repository { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime js { get; set; }
     }
 }

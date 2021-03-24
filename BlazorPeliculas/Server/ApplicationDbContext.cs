@@ -25,6 +25,20 @@ namespace BlazorPeliculas.Server
             //Creation of Primary Key
             modelBuilder.Entity<GeneroPelicula>().HasKey(x => new { x.GeneroId, x.PeliculaId});
             modelBuilder.Entity<PeliculaActor>().HasKey(x => new { x.PeliculaId, x.PersonaId});
+
+            //var personas = new List<Persona>();
+            //for (int i = 10; i < 500; i++)
+            //{
+            //    personas.Add(new Persona()
+            //    {
+            //        Id = i,
+            //        Nombre = $"Persona {i}",
+
+            //        FechaNacimiento = DateTime.Today
+            //    });
+            //}
+            //modelBuilder.Entity<Persona>().HasData(personas);
+
             base.OnModelCreating(modelBuilder);
         }
     }

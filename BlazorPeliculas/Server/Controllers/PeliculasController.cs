@@ -1,4 +1,5 @@
-﻿using BlazorPeliculas.Server.Helpers;
+﻿using AutoMapper;
+using BlazorPeliculas.Server.Helpers;
 using BlazorPeliculas.Shared.DTOs;
 using BlazorPeliculas.Shared.Entidades;
 using Microsoft.AspNetCore.Mvc;
@@ -14,13 +15,17 @@ namespace BlazorPeliculas.Server.Controllers
     [Route("api/[controller]")]
     public class PeliculasController : ControllerBase
     {
-        private readonly ApplicationDbContext context;
-        private readonly IAlmacenadorDeArchivos almacenadorDeArchivos;
+        private readonly ApplicationDbContext _context;
+        private readonly IAlmacenadorDeArchivos _almacenadorDeArchivos;
+        private readonly IMapper _mapper;
 
-        public PeliculasController(ApplicationDbContext context, IAlmacenadorDeArchivos almacenadorDeArchivos)
+        public PeliculasController(ApplicationDbContext context, 
+            IAlmacenadorDeArchivos almacenadorDeArchivos,
+            IMapper mapper)
         {
-            this.context = context;
-            this.almacenadorDeArchivos = almacenadorDeArchivos;
+            _context = context;
+            _almacenadorDeArchivos = almacenadorDeArchivos;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -28,14 +33,14 @@ namespace BlazorPeliculas.Server.Controllers
         {
             var limite = 6;
 
-            var peliculasEnCartelera = await context.Peliculas
+            var peliculasEnCartelera = await _context.Peliculas
                 .Where(x => x.EnCartelera).Take(limite)
                 .OrderByDescending(x => x.Lanzamiento)
                 .ToListAsync();
 
             var fechaActual = DateTime.Today;
 
-            var proximosEstrenos = await context.Peliculas
+            var proximosEstrenos = await _context.Peliculas
                 .Where(x => x.Lanzamiento > fechaActual)
                 .OrderBy(x => x.Lanzamiento).Take(limite)
                 .ToListAsync();
@@ -52,7 +57,7 @@ namespace BlazorPeliculas.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PeliculaVisualizarDTO>> Get(int id)
         {
-            var pelicula = await context.Peliculas.Where(x => x.Id == id)
+            var pelicula = await _context.Peliculas.Where(x => x.Id == id)
                 .Include(x => x.GenerosPelicula).ThenInclude(x => x.Genero)
                 .Include(x => x.PeliculasActor).ThenInclude(x => x.Persona)
                 .FirstOrDefaultAsync();
@@ -80,13 +85,35 @@ namespace BlazorPeliculas.Server.Controllers
             return model;
         }
 
+        [HttpGet("actualizar/{id}")]
+        public async Task<ActionResult<PeliculaActualizacionDTO>> PutGet(int id)
+        {
+            var peliculaActionResult = await Get(id);
+            if (peliculaActionResult.Result is NotFoundResult)
+            {
+                return NotFound();
+            }
+
+            var peliculaVisualizarDTO = peliculaActionResult.Value;
+            var generosSeleccionadosIds = peliculaVisualizarDTO.Generos.Select(x => x.Id).ToList();
+            var generosNoSeleccionados = await _context.Generos
+                .Where(x => !generosSeleccionadosIds.Contains(x.Id))
+                .ToListAsync();
+            var model = new PeliculaActualizacionDTO();
+            model.Pelicula = peliculaVisualizarDTO.Pelicula;
+            model.GenerosNoSeleccionados = generosNoSeleccionados;
+            model.GenerosSeleccionados = peliculaVisualizarDTO.Generos;
+            model.Actores = peliculaVisualizarDTO.Actores;
+            return model;
+        }
+
         [HttpPost]
         public async Task<ActionResult<int>> Post(Pelicula pelicula)
         {
             if (!string.IsNullOrEmpty(pelicula.Poster))
             {
                 var fotoPersona = Convert.FromBase64String(pelicula.Poster);
-                pelicula.Poster = await almacenadorDeArchivos.GuardarArchivo(fotoPersona, "jpg", "peliculas");
+                pelicula.Poster = await _almacenadorDeArchivos.GuardarArchivo(fotoPersona, "jpg", "peliculas");
             }
 
             if (pelicula.PeliculasActor != null)
@@ -97,9 +124,59 @@ namespace BlazorPeliculas.Server.Controllers
                 }
             }
 
-            context.Add(pelicula);
-            await context.SaveChangesAsync();
+            _context.Add(pelicula);
+            await _context.SaveChangesAsync();
             return pelicula.Id;
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> Put(Pelicula pelicula)
+        {
+            var peliculaDB = await _context.Peliculas.FirstOrDefaultAsync(x => x.Id == pelicula.Id);
+
+            if (peliculaDB == null)
+            {
+                return NotFound();
+            }
+
+            peliculaDB = _mapper.Map(pelicula, peliculaDB);
+
+            if (!string.IsNullOrWhiteSpace(pelicula.Poster))
+            {
+                var posterImagen = Convert.FromBase64String(pelicula.Poster);
+                peliculaDB.Poster = await _almacenadorDeArchivos.EditarArchivo(posterImagen, 
+                    "jpg", "peliculas", peliculaDB.Poster);
+            }
+
+            await _context.Database.ExecuteSqlInterpolatedAsync($"delete from GenerosPeliculas WHERE PeliculaId = {pelicula.Id}; delete from PeliculasActores WHERE PeliculaId = {pelicula.Id}");
+
+            if (pelicula.PeliculasActor != null)
+            {
+                for (int i = 0; i < pelicula.PeliculasActor.Count; i++)
+                {
+                    pelicula.PeliculasActor[i].Orden = i + 1;
+                }
+            }
+
+            peliculaDB.PeliculasActor = pelicula.PeliculasActor;
+            peliculaDB.GenerosPelicula = pelicula.GenerosPelicula;
+
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            var existe = await _context.Peliculas.AnyAsync(x => x.Id == id);
+            if (!existe)
+            {
+                return NotFound();
+            }
+
+            _context.Remove(new Pelicula { Id = id });
+            await _context.SaveChangesAsync();
+            return NoContent();
         }
     }
 }

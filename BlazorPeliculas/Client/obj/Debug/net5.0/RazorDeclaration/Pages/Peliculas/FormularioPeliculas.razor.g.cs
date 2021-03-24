@@ -138,6 +138,7 @@ using BlazorPeliculas.Shared.DTOs;
     private void ImagenSeleccionada(string imagenBase64)
     {
         Pelicula.Poster = imagenBase64;
+        posterTemporal = null;
     }
 
     private async Task<IEnumerable<Persona>> BuscarActores(string searchText)

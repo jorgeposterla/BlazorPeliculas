@@ -13,6 +13,9 @@ namespace BlazorPeliculas.Server.Helpers
         {
             CreateMap<Persona, Persona>()
                 .ForMember(x => x.Foto, option => option.Ignore());
+            
+            CreateMap<Pelicula, Pelicula>()
+                .ForMember(x => x.Poster, option => option.Ignore());
         }
     }
 }

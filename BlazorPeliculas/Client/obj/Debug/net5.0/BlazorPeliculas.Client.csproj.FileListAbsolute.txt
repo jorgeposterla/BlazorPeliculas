@@ -1382,3 +1382,5 @@ E:\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\net5.0\build-gz\UTqohy
 E:\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\net5.0\build-gz\O2LhIoxl.gz
 E:\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\net5.0\build-gz\zr6LmwQs.gz
 E:\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\net5.0\build-gz\CWrf4hRv.gz
+E:\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\net5.0\RazorDeclaration\Shared\Paginacion.razor.g.cs
+E:\repos\BlazorPeliculas\BlazorPeliculas\Client\obj\Debug\net5.0\Razor\Shared\Paginacion.razor.g.cs

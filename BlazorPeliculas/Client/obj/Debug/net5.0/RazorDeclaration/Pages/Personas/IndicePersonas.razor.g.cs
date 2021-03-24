@@ -112,20 +112,53 @@ using BlazorPeliculas.Shared.DTOs;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 36 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Personas\IndicePersonas.razor"
+#line 41 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Personas\IndicePersonas.razor"
        
 
     public List<Persona> Personas { get; set; }
+    private int paginaActual = 1;
+    private int paginasTotales;
 
     protected async override Task OnInitializedAsync()
     {
-        var responseHTTP = await repository.Get<List<Persona>>("api/personas");
-        Personas = responseHTTP.Response;
+        await Cargar();
+    }
+
+    private async Task paginaSeleccionada(int pagina)
+    {
+        paginaActual = pagina;
+        await Cargar(pagina);
+    }
+
+    private async Task Cargar(int pagina = 1)
+    {
+        var responseHTTP = await repository.Get<List<Persona>>($"api/personas?pagina={pagina}");
+        if (!responseHTTP.Error)
+        {
+            Personas = responseHTTP.Response;
+            var conteo = responseHTTP.HttpResponseMessage.Headers.GetValues("conteo").FirstOrDefault();
+            paginasTotales = int.Parse(responseHTTP.HttpResponseMessage.Headers.GetValues("totalPaginas").FirstOrDefault());
+        }
+    }
+
+    private async Task BorrarPersona(Persona persona)
+    {
+        var responseHttp = await repository.Delete($"api/personas/{persona.Id}");
+
+        if (responseHttp.Error)
+        {
+            await mostrarMensajes.MostrarMensajeError(await responseHttp.GetBody());
+        }
+        else
+        {
+            await Cargar();
+        }
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IMostrarMensajes mostrarMensajes { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IRepository repository { get; set; }
     }
 }

@@ -112,38 +112,59 @@ using BlazorPeliculas.Shared.DTOs;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 10 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Peliculas\EditarPelicula.razor"
+#line 22 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Peliculas\EditarPelicula.razor"
        
     [Parameter] public int PeliculaId { get; set; }
-    Pelicula Pelicula = new Pelicula();
+    Pelicula Pelicula;
     private List<Genero> GenerosSeleccionados = new List<Genero>();
     private List<Genero> GenerosNoSeleccionados = new List<Genero>();
+    private List<Persona> ActoresSeleccionados { get; set; }
 
-    protected override void OnInitialized()
+    protected async override Task OnInitializedAsync()
     {
-        Pelicula = new Pelicula() { Id = PeliculaId, Titulo = "Mi Pelicula" };
-        GenerosNoSeleccionados = new List<Genero>()
-        {
-            new Genero(){Id = 1, Nombre = "Comedia"},
-            new Genero(){Id = 2, Nombre = "Drama"},
+        var httpResponse = await repository
+            .Get<PeliculaActualizacionDTO>($"api/peliculas/actualizar/{PeliculaId}");
 
-            new Genero(){Id = 4, Nombre = "Sci-Fi"}
-        };
-
-        GenerosSeleccionados = new List<Genero>()
+        if (httpResponse.Error)
         {
-            new Genero() { Id = 3, Nombre = "Acción" }
-        };
+            if (httpResponse.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                navigationManager.NavigateTo("");
+            }
+            else
+            {
+                await mostrarMensaje.MostrarMensajeError(await httpResponse.GetBody());
+            }
+        }
+        else
+        {
+            var model = httpResponse.Response;
+            ActoresSeleccionados = model.Actores;
+            GenerosNoSeleccionados = model.GenerosNoSeleccionados;
+            GenerosSeleccionados = model.GenerosSeleccionados;
+            Pelicula = model.Pelicula;
+        }
     }
 
-    private void Editar()
+    private async Task Editar()
     {
-        Console.WriteLine("Editando Película");
+        var httpResponse = await repository.Put("api/peliculas", Pelicula);
+        if (httpResponse.Error)
+        {
+            await mostrarMensaje.MostrarMensajeError(await httpResponse.GetBody());
+        }
+        else
+        {
+            navigationManager.NavigateTo($"pelicula/{PeliculaId}");
+        }
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IMostrarMensajes mostrarMensaje { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IRepository repository { get; set; }
     }
 }
 #pragma warning restore 1591

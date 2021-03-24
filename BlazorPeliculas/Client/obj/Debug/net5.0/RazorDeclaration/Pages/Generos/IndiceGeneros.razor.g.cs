@@ -112,20 +112,40 @@ using BlazorPeliculas.Shared.DTOs;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 36 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Generos\IndiceGeneros.razor"
+#line 37 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Generos\IndiceGeneros.razor"
        
 
     public List<Genero> Generos { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
+        await Cargar();
+    }
+
+    private async Task Cargar()
+    {
         var responseHTTP = await repository.Get<List<Genero>>("api/generos");
         Generos = responseHTTP.Response;
+    }
+
+    private async Task BorrarGenero(Genero genero)
+    {
+        var responseHttp = await repository.Delete($"api/generos/{genero.Id}");
+
+        if (responseHttp.Error)
+        {
+            await mostrarMensajes.MostrarMensajeError(await responseHttp.GetBody());
+        }
+        else
+        {
+            await Cargar();
+        }
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IMostrarMensajes mostrarMensajes { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IRepository repository { get; set; }
     }
 }

@@ -12,7 +12,7 @@
         <ValidationMessage For="@(() => Persona.FechaNacimiento)" />
     </div>
     <div class="form-group">
-        <InputImg Label="Foto" ImagenSeleccionada="ImagenSeleccionada" ImagenTemporal="" />
+        <InputImg Label="Foto" ImagenSeleccionada="ImagenSeleccionada" ImagenTemporal="@imagenTemporal" />
     </div>
     <div class="form-group form-markdown">
         <InputMarkdown @bind-Value="@Persona.Biografia"
