@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj": {}
+    "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj": {}
   },
   "projects": {
-    "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj": {
+    "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj",
+        "projectUniqueName": "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj",
         "projectName": "BlazorPeliculas.Shared",
-        "projectPath": "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj",
-        "packagesPath": "C:\\Users\\Peregrino\\.nuget\\packages\\",
-        "outputPath": "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\obj\\",
+        "projectPath": "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj",
+        "packagesPath": "C:\\Users\\Moño\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Peregrino\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Moño\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

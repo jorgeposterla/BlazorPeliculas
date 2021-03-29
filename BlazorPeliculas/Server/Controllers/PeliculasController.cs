@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BlazorPeliculas.Client.Shared;
 using BlazorPeliculas.Server.Helpers;
 using BlazorPeliculas.Shared.DTOs;
 using BlazorPeliculas.Shared.Entidades;
@@ -105,6 +106,57 @@ namespace BlazorPeliculas.Server.Controllers
             model.GenerosSeleccionados = peliculaVisualizarDTO.Generos;
             model.Actores = peliculaVisualizarDTO.Actores;
             return model;
+        }
+
+        [HttpGet("filtrar")]
+        public async Task<ActionResult<List<Pelicula>>> Get([FromQuery] ParametrosBusquedaPeliculas parametrosBusqueda)
+        {
+            var peliculasQueryable = _context.Peliculas.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(parametrosBusqueda.Titulo))
+            {
+                peliculasQueryable = peliculasQueryable
+                    .Where(x => x.Titulo.ToLower().Contains(parametrosBusqueda.Titulo.ToLower()));
+            }
+
+            if (parametrosBusqueda.EnCartelera)
+            {
+                peliculasQueryable = peliculasQueryable.Where(x => x.EnCartelera);
+            }
+
+            if (parametrosBusqueda.Estrenos)
+            {
+                var hoy = DateTime.Today;
+                peliculasQueryable = peliculasQueryable.Where(x => x.Lanzamiento >= hoy);
+            }
+
+            if (parametrosBusqueda.GeneroId != 0)
+            {
+                peliculasQueryable = peliculasQueryable
+                    .Where(x => x.GenerosPelicula.Select(y => y.GeneroId)
+                    .Contains(parametrosBusqueda.GeneroId));
+            }
+            //TODO: Implementar votacion
+            await HttpContext.InsertarParametrosPaginacionEnRespuesta(peliculasQueryable, parametrosBusqueda.CantidadRegistros);
+
+            var peliculas = await peliculasQueryable.Paginar(parametrosBusqueda.Paginacion).ToListAsync();
+
+            return peliculas;
+        }
+
+        public class ParametrosBusquedaPeliculas
+        {
+            public int Pagina { get; set; } = 1;
+            public int CantidadRegistros { get; set; } = 10;
+            public PaginacionDTO Paginacion
+            {
+                get { return new PaginacionDTO { Pagina = Pagina, CantidadRegistros = CantidadRegistros }; }
+            }
+            public string Titulo { get; set; }
+            public int GeneroId { get; set; }
+            public bool EnCartelera { get; set; }
+            public bool Estrenos { get; set; }
+            public bool MasVotadas { get; set; }
         }
 
         [HttpPost]

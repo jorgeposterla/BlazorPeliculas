@@ -1,5 +1,5 @@
 ﻿<StaticWebAssets Version="1.0">
-  <ContentRoot BasePath="/" Path="E:\repos\BlazorPeliculas\BlazorPeliculas\Client\bin\Debug\net5.0\wwwroot\" />
-  <ContentRoot BasePath="/" Path="E:\repos\BlazorPeliculas\BlazorPeliculas\Client\wwwroot\" />
-  <ContentRoot BasePath="_content/Tewr.Blazor.FileReader" Path="C:\Users\Peregrino\.nuget\packages\tewr.blazor.filereader\3.0.0.20340\build\..\staticwebassets\" />
+  <ContentRoot BasePath="/" Path="C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\bin\Debug\net5.0\wwwroot\" />
+  <ContentRoot BasePath="/" Path="C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\wwwroot\" />
+  <ContentRoot BasePath="_content/Tewr.Blazor.FileReader" Path="C:\Users\Moño\.nuget\packages\tewr.blazor.filereader\3.0.0.20340\build\..\staticwebassets\" />
 </StaticWebAssets>

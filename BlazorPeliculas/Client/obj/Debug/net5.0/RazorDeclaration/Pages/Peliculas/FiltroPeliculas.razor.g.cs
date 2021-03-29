@@ -13,91 +13,91 @@ namespace BlazorPeliculas.Client.Pages.Peliculas
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 1 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 2 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using System.Net.Http.Json;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 3 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 4 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 5 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 6 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using Microsoft.AspNetCore.Components.WebAssembly.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 7 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 8 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using BlazorPeliculas.Client;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 9 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using BlazorPeliculas.Client.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 10 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using BlazorPeliculas.Shared.Entidades;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 11 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using BlazorPeliculas.Client.Repositories;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 12 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 12 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using BlazorPeliculas.Client.Helpers;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 13 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
+#line 13 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\_Imports.razor"
 using BlazorPeliculas.Shared.DTOs;
 
 #line default
@@ -112,7 +112,7 @@ using BlazorPeliculas.Shared.DTOs;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 47 "E:\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Peliculas\FiltroPeliculas.razor"
+#line 50 "C:\Users\Moño\source\repos\BlazorPeliculas\BlazorPeliculas\Client\Pages\Peliculas\FiltroPeliculas.razor"
        
     private List<Pelicula> Peliculas;
     string titulo = "";
@@ -121,43 +121,124 @@ using BlazorPeliculas.Shared.DTOs;
     private bool enCartelera = false;
     private bool masVotadas = false;
     private List<Genero> generos = new List<Genero>();
+    Dictionary<string, string> queryStringDict = new Dictionary<string, string>();
+    private int paginaActual = 1;
+    private int paginasTotales;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        Peliculas = repository.ObtenerPeliculas();
-    }
+        await ObtenerGeneros();
 
-    private void TituloKeyPress(KeyboardEventArgs e)
-    {
-        if (e.Key == "Enter")
+        var url = navigationManager.Uri;
+
+        var queries = navigationManager.ObtenerQueryStrings(url);
+
+        if (queries == null)
         {
-            CargarNuevasPeliculas();
+            await RealizarBusqueda(string.Empty);
+        }
+        else
+        {
+            queryStringDict = queries;
+            LlenarCampos();
+            var queryStrings = url.Split(new string[] { "?" }, StringSplitOptions.None)[1];
+            await RealizarBusqueda(queryStrings);
         }
     }
 
-    private void CargarNuevasPeliculas()
+    private void LlenarCampos()
     {
-        Peliculas = Peliculas.Where(x => x.Titulo.ToLower().Contains(titulo.ToLower())).ToList();
-        Console.WriteLine($"titulo: {titulo}");
-        Console.WriteLine($"generoSeleccionado: {generoSeleccionado}");
-        Console.WriteLine($"enCartelera: {enCartelera}");
-        Console.WriteLine($"futurosEstrenos: {futurosEstrenos}");
-        Console.WriteLine($"masVotadas: {masVotadas}");
+        if (queryStringDict.ContainsKey("generoid"))
+        {
+            generoSeleccionado = queryStringDict["generoid"];
+        }
+
+        if (queryStringDict.ContainsKey("titulo"))
+        {
+            titulo = queryStringDict["titulo"];
+        }
+
+        if (queryStringDict.ContainsKey("encartelera"))
+        {
+            bool.TryParse(queryStringDict["encartelera"], out enCartelera);
+        }
+
+        if (queryStringDict.ContainsKey("estrenos"))
+        {
+            bool.TryParse(queryStringDict["estrenos"], out futurosEstrenos);
+        }
     }
 
-    private void LimpiarOnClick()
+    private async Task PaginaSeleccionada(int pagina)
     {
-        Peliculas = repository.ObtenerPeliculas();
+        paginaActual = pagina;
+        await CargarNuevasPeliculas();
+    }
+
+    private async Task ObtenerGeneros()
+    {
+        var httpResponse = await repository.Get<List<Genero>>("api/generos");
+        generos = httpResponse.Response;
+    }
+
+    private async Task TituloKeyPress(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await CargarNuevasPeliculas();
+        }
+    }
+
+    private async Task CargarNuevasPeliculas()
+    {
+        var queryStrings = GenerarQueryStrings();
+        navigationManager.NavigateTo("/peliculas/buscar?" + queryStrings);
+        await RealizarBusqueda(queryStrings);
+    }
+
+    private async Task RealizarBusqueda(string queryStrings)
+    {
+        var httpresponse = await repository.Get<List<Pelicula>>("api/peliculas/filtrar?" + queryStrings);
+        paginasTotales = int.Parse(httpresponse.HttpResponseMessage.Headers.GetValues("totalPaginas").FirstOrDefault());
+        Peliculas = httpresponse.Response;
+    }
+
+    private string GenerarQueryStrings()
+    {
+        if (queryStringDict == null)
+        {
+            queryStringDict = new Dictionary<string, string>();
+        }
+
+        queryStringDict["generoid"] = generoSeleccionado;
+        queryStringDict["titulo"] = titulo;
+        queryStringDict["encartelera"] = enCartelera.ToString();
+        queryStringDict["estrenos"] = futurosEstrenos.ToString();
+        queryStringDict["masvotadas"] = masVotadas.ToString();
+        queryStringDict["pagina"] = paginaActual.ToString();
+
+        var valoresPorDefecto = new List<string>() { "false", "", "0" };
+
+        return string.Join("&", queryStringDict
+            .Where(x => !valoresPorDefecto.Contains(x.Value.ToLower()))
+            .Select(x => $"{x.Key}={System.Web.HttpUtility.UrlEncode(x.Value)}").ToArray());
+    }
+
+    private async Task LimpiarOnClick()
+    {
         titulo = "";
         generoSeleccionado = "0";
         futurosEstrenos = false;
         enCartelera = false;
         masVotadas = false;
+        paginaActual = 1;
+        await CargarNuevasPeliculas();
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager navigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IRepository repository { get; set; }
     }
 }

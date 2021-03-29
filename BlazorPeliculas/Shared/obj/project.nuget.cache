@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "vIIfGtlDjmYCiR/l4jstqRcGxba4vf9UArCRQpboI4goawGhz0AfSzUtisM/+QWRAKZwS8+oWBGUbjtrnHtV1Q==",
+  "dgSpecHash": "S3sJf7v9UBnBpqvIRxCHEEIhIK2Y77gRby043WGHwRVsxJwVm4goQN94VU4YFlXJub67QMrbQbkP9kBH7z3TWg==",
   "success": true,
-  "projectFilePath": "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj",
+  "projectFilePath": "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Peregrino\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
+    "C:\\Users\\Moño\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
   ],
   "logs": []
 }

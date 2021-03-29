@@ -8295,19 +8295,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Peregrino\\.nuget\\packages\\": {}
+    "C:\\Users\\Moño\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Server\\BlazorPeliculas.Server.csproj",
+      "projectUniqueName": "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Server\\BlazorPeliculas.Server.csproj",
       "projectName": "BlazorPeliculas.Server",
-      "projectPath": "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Server\\BlazorPeliculas.Server.csproj",
-      "packagesPath": "C:\\Users\\Peregrino\\.nuget\\packages\\",
-      "outputPath": "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Server\\obj\\",
+      "projectPath": "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Server\\BlazorPeliculas.Server.csproj",
+      "packagesPath": "C:\\Users\\Moño\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Peregrino\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Moño\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -8321,11 +8321,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Client\\BlazorPeliculas.Client.csproj": {
-              "projectPath": "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Client\\BlazorPeliculas.Client.csproj"
+            "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Client\\BlazorPeliculas.Client.csproj": {
+              "projectPath": "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Client\\BlazorPeliculas.Client.csproj"
             },
-            "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj": {
-              "projectPath": "E:\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj"
+            "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj": {
+              "projectPath": "C:\\Users\\Moño\\source\\repos\\BlazorPeliculas\\BlazorPeliculas\\Shared\\BlazorPeliculas.Shared.csproj"
             }
           }
         }
